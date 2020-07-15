@@ -181,31 +181,31 @@ double cos_taylor_running_yterms(double x, int y) {
 double cos_table_1(double x) {
   x = x - (int)(x * (1/(CONST_PI*2))) * (CONST_PI*2);
   int index = (int)((x / 1.0f) + 0.5);
-  return costable_1[index%7];
+  return costable_1[index];
 }
 
 double cos_table_0_1(double x) {
   x = x - (int)(x * (1/(CONST_PI*2))) * (CONST_PI*2);
   int index = (int)((x / 0.1f) + 0.5);
-  return costable_0_1[index%63];
+  return costable_0_1[index];
 }
 
 double cos_table_0_01(double x) {
   x = x - (int)(x * (1/(CONST_PI*2))) * (CONST_PI*2);
   int index = (int)((x / 0.01f) + 0.5);
-  return costable_0_01[index%628];
+  return costable_0_01[index];
 }
 
 double cos_table_0_001(double x) {
   x = x - (int)(x * (1/(CONST_PI*2))) * (CONST_PI*2);
   int index = (int)((x / 0.001f) + 0.5);
-  return costable_0_001[index%6283];
+  return costable_0_001[index];
 }
 
 double cos_table_0_0001(double x) {
   x = x - (int)(x * (1/(CONST_PI*2))) * (CONST_PI*2);
   int index = (int)((x / 0.0001f) + 0.5);
-  return costable_0_0001[index%62831];
+  return costable_0_0001[index];
 }
 
 
