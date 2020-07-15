@@ -8,7 +8,7 @@
 #include "costable_0_0001.h"
 
 #define CONST_PI 3.14159265358979323846264338327950288419716939937510
-#define CONST_EPS 0.000000000000001
+#define CONST_EPS 0.000000000000000
 
 
 // Naive Taylor series.
@@ -215,7 +215,7 @@ double cos_table_1_LERP(double x) {
   x = x - (int)(x * (1/(CONST_PI*2))) * (CONST_PI*2);
   int index = (int)(x);
   double v1 = costable_1[index];
-  double v2 = costable_1[(index+1)%7];
+  double v2 = costable_1[(index+1)];
   double i = x * 1.0;
   double w = i - (int)i;
   return (1.0 - w) * v1 + w * v2;
@@ -225,7 +225,7 @@ double cos_table_0_1_LERP(double x) {
   x = x - (int)(x * (1/(CONST_PI*2))) * (CONST_PI*2);
   int index = (int)((x / 0.1) + CONST_EPS);
   double v1 = costable_0_1[index];
-  double v2 = costable_0_1[(index+1)%63];
+  double v2 = costable_0_1[(index+1)];
   double i = x * 10.0;
   double w = i - (int)i;
   return (1.0 - w) * v1 + w * v2;
@@ -235,7 +235,7 @@ double cos_table_0_01_LERP(double x) {
   x = x - (int)(x * (1/(CONST_PI*2))) * (CONST_PI*2);
   int index = (int)((x / 0.01) + CONST_EPS);
   double v1 = costable_0_01[index];
-  double v2 = costable_0_01[(index+1)%629];
+  double v2 = costable_0_01[(index+1)];
   double i = x * 100.0;
   double w = i - (int)i;
   return (1.0 - w) * v1 + w * v2;
@@ -246,7 +246,7 @@ double cos_table_0_001_LERP(double x) {
   x = x - (int)(x * (1/(CONST_PI*2))) * (CONST_PI*2);
   int index = (int)((x / 0.001) + CONST_EPS);
   double v1 = costable_0_001[index];
-  double v2 = costable_0_001[(index+1)%6284];
+  double v2 = costable_0_001[(index+1)];
   double i = x * 1000.0;
   double w = i - (int)i;
   return (1.0 - w) * v1 + w * v2;
@@ -256,7 +256,7 @@ double cos_table_0_0001_LERP(double x) {
   x = x - (int)(x * (1/(CONST_PI*2))) * (CONST_PI*2);
   int index = (int)((x / 0.0001) + CONST_EPS);
   double v1 = costable_0_0001[index];
-  double v2 = costable_0_0001[(index+1)%62832];
+  double v2 = costable_0_0001[(index+1)];
   double i = x * 10000.0;
   double w = i - (int)i;
   return (1.0 - w) * v1 + w * v2;
