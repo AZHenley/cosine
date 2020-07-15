@@ -1,5 +1,7 @@
 // Austin Henley and Stephen Marz
-// http://austinhenley.com/blog/cosine.html
+// See the explanation and benchmarks at http://austinhenley.com/blog/cosine.html
+// Various methods of calculating cosine without math.h
+// For educational purposes only :)
 
 #include "costable_1.h"
 #include "costable_0_1.h"
