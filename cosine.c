@@ -66,6 +66,50 @@ double cos_taylor_literal_10terms(double x) {
 
 // Taylor series with running product.
 
+double cos_taylor_running_6terms(double x) {
+  int div = (int)(x * (1/CONST_PI)); 
+  x = x - (div * CONST_PI);
+  char sign = 1;
+  if(div % 2 != 0)
+    sign = -1;
+
+  double result = 1.0;
+  double inter = 1.0;
+  double num = x * x;
+  for(int i = 1; i <= 6; i++) {
+    double comp = 2.0 * i;
+    double den = comp * (comp - 1.0);
+    inter *= num / den;
+    if(i % 2 == 0)
+      result += inter;
+    else
+      result -= inter;
+  }
+  return sign * result;
+}
+
+double cos_taylor_running_8terms(double x) {
+  int div = (int)(x * (1/CONST_PI)); 
+  x = x - (div * CONST_PI);
+  char sign = 1;
+  if(div % 2 != 0)
+    sign = -1;
+
+  double result = 1.0;
+  double inter = 1.0;
+  double num = x * x;
+  for(int i = 1; i <= 8; i++) {
+    double comp = 2.0 * i;
+    double den = comp * (comp - 1.0);
+    inter *= num / den;
+    if(i % 2 == 0)
+      result += inter;
+    else
+      result -= inter;
+  }
+  return sign * result;
+}
+
 double cos_taylor_running_10terms(double x) {
   int div = (int)(x * (1/CONST_PI)); 
   x = x - (div * CONST_PI);
