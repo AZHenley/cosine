@@ -212,16 +212,14 @@ double cos_table_1(double x)
 {
     x = absd(x);
     x = modd(x, CONST_2PI);
-    int index = (int)(x + 0.5);
-    return costable_1[index];
+    return costable_1[(int)(x + 0.5)];
 }
 
 double cos_table_0_1(double x)
 {
     x = absd(x);
     x = modd(x, CONST_2PI);
-    int index = (int)(x * 10 + 0.5);
-    return costable_0_1[index];
+    return costable_0_1[(int)(x * 10 + 0.5)];
 }
 
 
@@ -229,24 +227,21 @@ double cos_table_0_01(double x)
 {
     x = absd(x);
     x = modd(x, CONST_2PI);
-    int index = (int)(x * 100 + 0.5);
-    return costable_0_01[index];
+    return costable_0_01[(int)(x * 100 + 0.5)];
 }
 
 double cos_table_0_001(double x)
 {
     x = absd(x);
     x = modd(x, CONST_2PI);
-    int index = (int)(x * 1000 + 0.5);
-    return costable_0_001[index];
+    return costable_0_001[(int)(x * 1000 + 0.5)];
 }
 
 double cos_table_0_0001(double x)
 {
     x = absd(x);
     x = modd(x, CONST_2PI);
-    int index = (int)(x * 10000 + 0.5);
-    return costable_0_0001[index];
+    return costable_0_0001[(int)(x * 10000 + 0.5)];
 }
 
 //
@@ -259,10 +254,10 @@ double cos_table_1_LERP(double x)
     x = modd(x, CONST_2PI);
     double i = x * 1.0;
     int index = (int)i;
-    double v1 = costable_1[index];
-    double v2 = costable_1[index + 1];
-    double w = i - index;
-    return lerp(w, v1, v2);
+    return lerp(i - index,             /* weight      */
+                costable_1[index],     /* lower value */
+                costable_1[index + 1]  /* upper value */
+                );
 }
 
 double cos_table_0_1_LERP(double x)
@@ -271,10 +266,10 @@ double cos_table_0_1_LERP(double x)
     x = modd(x, CONST_2PI);
     double i = x * 10.0;
     int index = (int)i;
-    double v1 = costable_0_1[index];
-    double v2 = costable_0_1[index + 1];
-    double w = i - index;
-    return lerp(w, v1, v2);
+    return lerp(i - index,               /* weight      */
+                costable_0_1[index],     /* lower value */
+                costable_0_1[index + 1]  /* upper value */
+                );
 }
 
 double cos_table_0_01_LERP(double x)
@@ -283,10 +278,10 @@ double cos_table_0_01_LERP(double x)
     x = modd(x, CONST_2PI);
     double i = x * 100.0;
     int index = (int)i;
-    double v1 = costable_0_01[index];
-    double v2 = costable_0_01[index + 1];
-    double w = i - index;
-    return lerp(w, v1, v2);
+    return lerp(i - index,                /* weight      */
+                costable_0_01[index],     /* lower value */
+                costable_0_01[index + 1]  /* upper value */
+                );
 }
 
 double cos_table_0_001_LERP(double x)
@@ -295,10 +290,10 @@ double cos_table_0_001_LERP(double x)
     x = modd(x, CONST_2PI);
     double i = x * 1000.0;
     int index = (int)i;
-    double v1 = costable_0_001[index];
-    double v2 = costable_0_001[index + 1];
-    double w = i - index;
-    return lerp(w, v1, v2);
+    return lerp(i - index,                 /* weight      */
+                costable_0_001[index],     /* lower value */
+                costable_0_001[index + 1]  /* upper value */
+                );
 }
 
 double cos_table_0_0001_LERP(double x)
@@ -307,8 +302,8 @@ double cos_table_0_0001_LERP(double x)
     x = modd(x, CONST_2PI);
     double i = x * 10000.0;
     int index = (int)i;
-    double v1 = costable_0_0001[index];
-    double v2 = costable_0_0001[index + 1];
-    double w = i - index;
-    return lerp(w, v1, v2);
+    return lerp(i - index,                  /* weight      */
+                costable_0_0001[index],     /* lower value */
+                costable_0_0001[index + 1]  /* upper value */
+                );
 }
