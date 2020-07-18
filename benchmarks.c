@@ -32,57 +32,56 @@ double accuracy(double (*func)(double))
     return w;
 }
 
+#define RTEST(x)  { #x, x }
+
+struct Tester {
+    char name[255];
+    double (*func)(double v);
+};
+
+static struct Tester tests[] = {
+    /* cos_taylor_literal */
+    RTEST(cos_taylor_literal_4terms_naive),
+    RTEST(cos_taylor_literal_6terms_naive),
+    RTEST(cos_taylor_literal_6terms_2pi),
+    RTEST(cos_taylor_literal_6terms_pi),
+    RTEST(cos_taylor_literal_6terms),
+    RTEST(cos_taylor_literal_10terms),
+    /* cos_taylor_running */
+    RTEST(cos_taylor_running_6terms),
+    RTEST(cos_taylor_running_8terms),
+    RTEST(cos_taylor_running_10terms),
+    RTEST(cos_taylor_running_16terms),
+    /* cos_table */
+    RTEST(cos_table_1),
+    RTEST(cos_table_0_1),
+    RTEST(cos_table_0_01),
+    RTEST(cos_table_0_001),
+    RTEST(cos_table_0_0001),
+    /* cos_table_lerp */
+    RTEST(cos_table_1_LERP),
+    RTEST(cos_table_0_1_LERP),
+    RTEST(cos_table_0_01_LERP),
+    RTEST(cos_table_0_001_LERP),
+    RTEST(cos_table_0_0001_LERP),
+};
+
+const int num_tests = sizeof(tests) / sizeof(*tests);
+
 // Benchmarks the accuracy and time for all of our cosine implementations.
-int main(void)
+int main(int argc, char *argv[])
 {
+    int i;
     printf("Cosine benchmark\n\n");
-
     printf("ACCURACY\n");
-    printf("cos_taylor_literal_4terms_naive \t%.16f\n", accuracy(cos_taylor_literal_4terms_naive));
-    printf("cos_taylor_literal_6terms_naive \t%.16f\n", accuracy(cos_taylor_literal_6terms_naive));
-    printf("cos_taylor_literal_6terms_2pi \t\t%.16f\n", accuracy(cos_taylor_literal_6terms_2pi));
-    printf("cos_taylor_literal_6terms_pi \t\t%.16f\n", accuracy(cos_taylor_literal_6terms_pi));
-    printf("cos_taylor_literal_6terms \t\t%.16f\n", accuracy(cos_taylor_literal_6terms));
-    printf("cos_taylor_literal_10terms \t\t%.16f\n", accuracy(cos_taylor_literal_10terms));
-    printf("cos_taylor_running_6terms \t\t%.16f\n", accuracy(cos_taylor_running_6terms));
-    printf("cos_taylor_running_8terms \t\t%.16f\n", accuracy(cos_taylor_running_8terms));
-    printf("cos_taylor_running_10terms \t\t%.16f\n", accuracy(cos_taylor_running_10terms));
-    printf("cos_taylor_running_16terms \t\t%.16f\n", accuracy(cos_taylor_running_16terms));
-    printf("cos_table_1 \t\t\t\t%.16f\n", accuracy(cos_table_1));
-    printf("cos_table_0_1 \t\t\t\t%.16f\n", accuracy(cos_table_0_1));
-    printf("cos_table_0_01 \t\t\t\t%.16f\n", accuracy(cos_table_0_01));
-    printf("cos_table_0_001 \t\t\t%.16f\n", accuracy(cos_table_0_001));
-    printf("cos_table_0_0001 \t\t\t%.16f\n", accuracy(cos_table_0_0001));
-    printf("cos_table_1_LERP \t\t\t%.16f\n", accuracy(cos_table_1));
-    printf("cos_table_0_1_LERP \t\t\t%.16f\n", accuracy(cos_table_0_1_LERP));
-    printf("cos_table_0_01_LERP \t\t\t%.16f\n", accuracy(cos_table_0_01_LERP));
-    printf("cos_table_0_001_LERP \t\t\t%.16f\n", accuracy(cos_table_0_001_LERP));
-    printf("cos_table_0_0001_LERP \t\t\t%.16f\n", accuracy(cos_table_0_0001_LERP));
-
+    for (i = 0;i < num_tests;i++) {
+        printf("%-35s %.16lf\n", tests[i].name, accuracy(tests[i].func));
+    }
+    
     printf("\nTIME\n");
-    printf("cos_taylor_literal_4terms_naive \t%.16f\n", runtime(cos_taylor_literal_4terms_naive));
-    printf("cos_taylor_literal_6terms_naive \t%.16f\n", runtime(cos_taylor_literal_6terms_naive));
-    printf("cos_taylor_literal_6terms_2pi \t\t%.16f\n", runtime(cos_taylor_literal_6terms_2pi));
-    printf("cos_taylor_literal_6terms_pi \t\t%.16f\n", runtime(cos_taylor_literal_6terms_pi));
-    printf("cos_taylor_literal_6terms \t\t%.16f\n", runtime(cos_taylor_literal_6terms));
-    printf("cos_taylor_literal_10terms \t\t%.16f\n", runtime(cos_taylor_literal_10terms));
-    printf("cos_taylor_running_6terms \t\t%.16f\n", runtime(cos_taylor_running_6terms));
-    printf("cos_taylor_running_8terms \t\t%.16f\n", runtime(cos_taylor_running_8terms));
-    printf("cos_taylor_running_10terms \t\t%.16f\n", runtime(cos_taylor_running_10terms));
-    printf("cos_taylor_running_16terms \t\t%.16f\n", runtime(cos_taylor_running_16terms));
-    printf("cos_table_1 \t\t\t\t%.16f\n", runtime(cos_table_1));
-    printf("cos_table_0_1 \t\t\t\t%.16f\n", runtime(cos_table_0_1));
-    printf("cos_table_0_01 \t\t\t\t%.16f\n", runtime(cos_table_0_01));
-    printf("cos_table_0_001 \t\t\t%.16f\n", runtime(cos_table_0_001));
-    printf("cos_table_0_0001 \t\t\t%.16f\n", runtime(cos_table_0_0001));
-    printf("cos_table_1_LERP \t\t\t%.16f\n", runtime(cos_table_1));
-    printf("cos_table_0_1_LERP \t\t\t%.16f\n", runtime(cos_table_0_1_LERP));
-    printf("cos_table_0_01_LERP \t\t\t%.16f\n", runtime(cos_table_0_01_LERP));
-    printf("cos_table_0_001_LERP \t\t\t%.16f\n", runtime(cos_table_0_001_LERP));
-    printf("cos_table_0_0001_LERP \t\t\t%.16f\n", runtime(cos_table_0_0001_LERP));
-    printf("math.h \t\t\t\t\t%.16f\n", runtime(cos));
-    printf("\n");
-
+    for (i = 0;i < num_tests;i++) {
+        printf("%-35s %.16lf\n", tests[i].name, runtime(tests[i].func));
+    }
     // Code for generating a data file for gnuplot.
     /*
     FILE *f = fopen("plots/cosine.txt", "w");
