@@ -9,11 +9,14 @@
 #include "costable_0_001.h"
 #include "costable_0_0001.h"
 
-#define CONST_PI 3.14159265358979323846264338327950288419716939937510
+#define CONST_PI  3.14159265358979323846264338327950288419716939937510
+#define CONST_2PI 6.28318530717958623199592693708837032318115234375000
 
 // Absolute value for doubles.
 double absd(double a) { *((unsigned long *)&a) &= ~(1UL << 63); return a; }
 
+#define modd(x, y) ((x) - (int)((x) / (y)) * (y))
+#define lerp(w, v1, v2) ((1.0 - (w)) * (v1) + (w) * (v2))
 //
 // Naive Taylor series functions.
 //
@@ -32,13 +35,13 @@ double cos_taylor_literal_6terms_naive(double x)
 
 double cos_taylor_literal_6terms_2pi(double x)
 {
-    x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
+    x = modd(x, 2 * CONST_PI);
     return 1 - ((x * x) / (2)) + ((x * x * x * x) / (24)) - ((x * x * x * x * x * x) / (720)) + ((x * x * x * x * x * x * x * x) / (40320)) - ((x * x * x * x * x * x * x * x * x * x) / (3628800)) + ((x * x * x * x * x * x * x * x * x * x * x * x) / (479001600));
 }
 
 double cos_taylor_literal_6terms_pi(double x)
 {
-    x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
+    x = modd(x, CONST_2PI);
     char sign = 1;
     if (x > CONST_PI)
     {
@@ -50,7 +53,7 @@ double cos_taylor_literal_6terms_pi(double x)
 
 double cos_taylor_literal_6terms(double x)
 {
-    x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
+    x = modd(x, CONST_2PI);
     char sign = 1;
     if (x > CONST_PI)
     {
@@ -64,7 +67,7 @@ double cos_taylor_literal_6terms(double x)
 
 double cos_taylor_literal_10terms(double x)
 {
-    x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
+    x = modd(x, CONST_2PI);
     char sign = 1;
     if (x > CONST_PI)
     {
@@ -82,7 +85,7 @@ double cos_taylor_literal_10terms(double x)
 
 double cos_taylor_running_6terms(double x)
 {
-    int div = (int)(x * (1 / CONST_PI));
+    int div = (int)(x / CONST_PI);
     x = x - (div * CONST_PI);
     char sign = 1;
     if (div % 2 != 0)
@@ -106,7 +109,7 @@ double cos_taylor_running_6terms(double x)
 
 double cos_taylor_running_8terms(double x)
 {
-    int div = (int)(x * (1 / CONST_PI));
+    int div = (int)(x / CONST_PI);
     x = x - (div * CONST_PI);
     char sign = 1;
     if (div % 2 != 0)
@@ -130,7 +133,7 @@ double cos_taylor_running_8terms(double x)
 
 double cos_taylor_running_10terms(double x)
 {
-    int div = (int)(x * (1 / CONST_PI));
+    int div = (int)(x / CONST_PI);
     x = x - (div * CONST_PI);
     char sign = 1;
     if (div % 2 != 0)
@@ -154,7 +157,7 @@ double cos_taylor_running_10terms(double x)
 
 double cos_taylor_running_16terms(double x)
 {
-    int div = (int)(x * (1 / CONST_PI));
+    int div = (int)(x / CONST_PI);
     x = x - (div * CONST_PI);
     char sign = 1;
     if (div % 2 != 0)
@@ -178,7 +181,7 @@ double cos_taylor_running_16terms(double x)
 
 double cos_taylor_running_yterms(double x, int y)
 {
-    int div = (int)(x * (1 / CONST_PI));
+    int div = (int)(x / CONST_PI);
     x = x - (div * CONST_PI);
     char sign = 1;
     if (div % 2 != 0)
@@ -207,7 +210,7 @@ double cos_taylor_running_yterms(double x, int y)
 double cos_table_1(double x)
 {
     x = absd(x);
-    x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
+    x = modd(x, CONST_2PI);
     int index = (int)((x / 1.0) + 0.5);
     return costable_1[index];
 }
@@ -215,7 +218,7 @@ double cos_table_1(double x)
 double cos_table_0_1(double x)
 {
     x = absd(x);
-    x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
+    x = modd(x, CONST_2PI);
     int index = (int)((x / 0.1) + 0.5);
     return costable_0_1[index];
 }
@@ -224,7 +227,7 @@ double cos_table_0_1(double x)
 double cos_table_0_01(double x)
 {
     x = absd(x);
-    x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
+    x = modd(x, CONST_2PI);
     int index = (int)((x / 0.01) + 0.5);
     return costable_0_01[index];
 }
@@ -232,7 +235,7 @@ double cos_table_0_01(double x)
 double cos_table_0_001(double x)
 {
     x = absd(x);
-    x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
+    x = modd(x, CONST_2PI);
     int index = (int)((x / 0.001) + 0.5);
     return costable_0_001[index];
 }
@@ -240,7 +243,7 @@ double cos_table_0_001(double x)
 double cos_table_0_0001(double x)
 {
     x = absd(x);
-    x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
+    x = modd(x, CONST_2PI);
     int index = (int)((x / 0.0001) + 0.5);
     return costable_0_0001[index];
 }
@@ -252,59 +255,59 @@ double cos_table_0_0001(double x)
 double cos_table_1_LERP(double x)
 {
     x = absd(x);
-    x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
-    int index = (int)(x);
+    x = modd(x, CONST_2PI);
+    double i = x * 1.0;
+    int index = (int)i;
     double v1 = costable_1[index];
     double v2 = costable_1[(index + 1)];
-    double i = x * 1.0;
     double w = i - (int)i;
-    return (1.0 - w) * v1 + w * v2;
+    return lerp(w, v1, v2);
 }
 
 double cos_table_0_1_LERP(double x)
 {
     x = absd(x);
-    x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
-    int index = (int)((x / 0.1));
-    double v1 = costable_0_1[index];
-    double v2 = costable_0_1[(index + 1)];
+    x = modd(x, CONST_2PI);
     double i = x * 10.0;
+    int index = (int)i;
+    double v1 = costable_0_1[index];
+    double v2 = costable_0_1[index + 1];
     double w = i - (int)i;
-    return (1.0 - w) * v1 + w * v2;
+    return lerp(w, v1, v2);
 }
 
 double cos_table_0_01_LERP(double x)
 {
     x = absd(x);
-    x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
-    int index = (int)((x / 0.01));
+    x = modd(x, CONST_2PI);
+    double i = x * 100.0;
+    int index = (int)i;
     double v1 = costable_0_01[index];
     double v2 = costable_0_01[(index + 1)];
-    double i = x * 100.0;
     double w = i - (int)i;
-    return (1.0 - w) * v1 + w * v2;
+    return lerp(w, v1, v2);
 }
 
 double cos_table_0_001_LERP(double x)
 {
     x = absd(x);
-    x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
-    int index = (int)((x / 0.001));
+    x = modd(x, CONST_2PI);
+    double i = x * 1000.0;
+    int index = (int)i;
     double v1 = costable_0_001[index];
     double v2 = costable_0_001[(index + 1)];
-    double i = x * 1000.0;
     double w = i - (int)i;
-    return (1.0 - w) * v1 + w * v2;
+    return lerp(w, v1, v2);
 }
 
 double cos_table_0_0001_LERP(double x)
 {
     x = absd(x);
-    x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
-    int index = (int)((x / 0.0001));
+    x = modd(x, CONST_2PI);
+    double i = x * 10000.0;
+    int index = (int)i;
     double v1 = costable_0_0001[index];
     double v2 = costable_0_0001[(index + 1)];
-    double i = x * 10000.0;
     double w = i - (int)i;
-    return (1.0 - w) * v1 + w * v2;
+    return lerp(w, v1, v2);
 }
