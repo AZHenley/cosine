@@ -11,6 +11,7 @@ double runtime(double (*func)(double))
     for (int i = 0; i < 100000000; i++)
     {
         volatile double c = func(i / 10000.0);
+        (void)c;
     }
     return (clock() - start) / (double)CLOCKS_PER_SEC;
 }
@@ -72,10 +73,6 @@ int main(int argc, char *argv[])
 {
     int run_accuracy = 1;
     int run_runtime = 1;
-    int literal = 1;
-    int running = 1;
-    int table = 1;
-    int lerp = 1;
     int i;
     int j;
 
