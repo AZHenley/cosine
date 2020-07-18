@@ -260,7 +260,7 @@ double cos_table_1_LERP(double x)
     double i = x * 1.0;
     int index = (int)i;
     double v1 = costable_1[index];
-    double v2 = costable_1[index + 1);
+    double v2 = costable_1[index + 1];
     double w = i - index;
     return lerp(w, v1, v2);
 }
