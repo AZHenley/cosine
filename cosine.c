@@ -54,7 +54,7 @@ double cos_taylor_literal_6terms_pi(double x)
 double cos_taylor_literal_6terms(double x)
 {
     unsigned long sign = SIGN_BIT(x);
-    x = absd(x);
+    // x = absd(x);
     x = modd(x, CONST_2PI);
     double xx = x * x;
 

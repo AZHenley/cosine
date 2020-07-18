@@ -36,13 +36,14 @@ double accuracy(double (*func)(double))
 int main(void)
 {
     printf("Cosine benchmark\n\n");
-/*
+
     printf("ACCURACY\n");
     printf("cos_taylor_literal_4terms_naive \t%.16f\n", accuracy(cos_taylor_literal_4terms_naive));
     printf("cos_taylor_literal_6terms_naive \t%.16f\n", accuracy(cos_taylor_literal_6terms_naive));
     printf("cos_taylor_literal_6terms_2pi \t\t%.16f\n", accuracy(cos_taylor_literal_6terms_2pi));
     printf("cos_taylor_literal_6terms_pi \t\t%.16f\n", accuracy(cos_taylor_literal_6terms_pi));
     printf("cos_taylor_literal_6terms \t\t%.16f\n", accuracy(cos_taylor_literal_6terms));
+    /*
     printf("cos_taylor_literal_10terms \t\t%.16f\n", accuracy(cos_taylor_literal_10terms));
     printf("cos_taylor_running_6terms \t\t%.16f\n", accuracy(cos_taylor_running_6terms));
     printf("cos_taylor_running_8terms \t\t%.16f\n", accuracy(cos_taylor_running_8terms));
