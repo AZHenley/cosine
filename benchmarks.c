@@ -35,12 +35,10 @@ double accuracy(double (*func)(double))
 
 #define RTEST(x)  { #x, x }
 
-struct Tester {
+static struct {
     char name[35];
     double (*func)(double v);
-};
-
-static struct Tester tests[] = {
+} tests[] = {
     /* cos_taylor_literal */
     RTEST(cos_taylor_literal_4terms_naive),
     RTEST(cos_taylor_literal_6terms_naive),
