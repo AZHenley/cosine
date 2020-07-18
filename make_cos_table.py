@@ -11,13 +11,11 @@ def main(f, PRECISION, NAME):
     while True:
         f.write("{:.20f}, ".format(cos(p)))
         j += 1
-        if j > 10:
-            j = 0
         p += PRECISION
         if p > 2*pi:
             break
     f.write("1.0 };\n")
-
+    f.write("const int %s_size = %d;\n" % (NAME, j+1))
 
 
 if __name__ == '__main__':
