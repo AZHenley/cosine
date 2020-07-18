@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
+#include <string.h>
 #include "cosine.c"
 
 // Measures the time of many executions in seconds. Smaller number is better.
@@ -71,17 +72,39 @@ const int num_tests = sizeof(tests) / sizeof(*tests);
 // Benchmarks the accuracy and time for all of our cosine implementations.
 int main(int argc, char *argv[])
 {
+    int run_accuracy = 1;
+    int run_runtime = 1;
+    int literal = 1;
+    int running = 1;
+    int table = 1;
+    int lerp = 1;
     int i;
+
+    for (i = 1;i < argc;i++) {
+        if (!strcmp(argv[i], "-na")) {
+            run_accuracy = 0;
+        }
+        else if (!strcmp(argv[i], "-nt")) {
+            run_runtime = 0;
+        }
+    }
+
+
     printf("Cosine benchmark\n\n");
-    printf("ACCURACY\n");
-    for (i = 0;i < num_tests;i++) {
-        printf("%-35s %.16lf\n", tests[i].name, accuracy(tests[i].func));
+    if (run_accuracy) {
+        printf("ACCURACY\n");
+        for (i = 0;i < num_tests;i++) {
+            printf("%-35s %.16lf\n", tests[i].name, accuracy(tests[i].func));
+        }
     }
     
-    printf("\nTIME\n");
-    for (i = 0;i < num_tests;i++) {
-        printf("%-35s %.16lf\n", tests[i].name, runtime(tests[i].func));
+    if (run_runtime) {
+        printf("\nTIME\n");
+        for (i = 0;i < num_tests;i++) {
+            printf("%-35s %.16lf\n", tests[i].name, runtime(tests[i].func));
+        }
     }
+    printf("\n\nDone\n");
     // Code for generating a data file for gnuplot.
     /*
     FILE *f = fopen("plots/cosine.txt", "w");
