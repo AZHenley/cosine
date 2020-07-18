@@ -197,6 +197,8 @@ double cos_taylor_running_yterms(double x, int y)
 
 double cos_table_1(double x)
 {
+    if(x < 0)
+      x *= -1;
     x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
     int index = (int)((x / 1.0) + 0.5);
     return costable_1[index];
@@ -204,6 +206,8 @@ double cos_table_1(double x)
 
 double cos_table_0_1(double x)
 {
+    if(x < 0)
+      x *= -1;
     x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
     int index = (int)((x / 0.1) + 0.5);
     return costable_0_1[index];
@@ -211,6 +215,8 @@ double cos_table_0_1(double x)
 
 double cos_table_0_01(double x)
 {
+    if(x < 0)
+      x *= -1;
     x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
     int index = (int)((x / 0.01) + 0.5);
     return costable_0_01[index];
@@ -218,6 +224,8 @@ double cos_table_0_01(double x)
 
 double cos_table_0_001(double x)
 {
+    if(x < 0)
+      x *= -1;
     x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
     int index = (int)((x / 0.001) + 0.5);
     return costable_0_001[index];
@@ -225,6 +233,8 @@ double cos_table_0_001(double x)
 
 double cos_table_0_0001(double x)
 {
+    if(x < 0)
+      x *= -1;
     x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
     int index = (int)((x / 0.0001) + 0.5);
     return costable_0_0001[index];
@@ -234,6 +244,8 @@ double cos_table_0_0001(double x)
 
 double cos_table_1_LERP(double x)
 {
+    if(x < 0)
+      x *= -1;
     x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
     int index = (int)(x);
     double v1 = costable_1[index];
@@ -245,6 +257,8 @@ double cos_table_1_LERP(double x)
 
 double cos_table_0_1_LERP(double x)
 {
+    if(x < 0)
+      x *= -1;
     x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
     int index = (int)((x / 0.1));
     double v1 = costable_0_1[index];
@@ -256,6 +270,8 @@ double cos_table_0_1_LERP(double x)
 
 double cos_table_0_01_LERP(double x)
 {
+    if(x < 0)
+      x *= -1;
     x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
     int index = (int)((x / 0.01));
     double v1 = costable_0_01[index];
@@ -267,7 +283,8 @@ double cos_table_0_01_LERP(double x)
 
 double cos_table_0_001_LERP(double x)
 {
-    double ox = x;
+    if(x < 0)
+      x *= -1;
     x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
     int index = (int)((x / 0.001));
     double v1 = costable_0_001[index];
@@ -279,6 +296,8 @@ double cos_table_0_001_LERP(double x)
 
 double cos_table_0_0001_LERP(double x)
 {
+    if(x < 0)
+      x *= -1;
     x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
     int index = (int)((x / 0.0001));
     double v1 = costable_0_0001[index];
