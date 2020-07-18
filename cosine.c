@@ -15,8 +15,6 @@
 // Absolute value for doubles.
 double absd(double a) { *((unsigned long *)&a) &= ~(1UL << 63); return a; }
 
-#define SIGN_BIT(x) (*((unsigned long *)&x) >> 63)
-
 #define modd(x, y) ((x) - (int)((x) / (y)) * (y))
 #define lerp(w, v1, v2) ((1.0 - (w)) * (v1) + (w) * (v2))
 //
@@ -37,18 +35,20 @@ double cos_taylor_literal_6terms_naive(double x)
 
 double cos_taylor_literal_6terms_2pi(double x)
 {
-    x = modd(x, CONST_2PI);
+    x = modd(x, 2 * CONST_PI);
     return 1 - ((x * x) / (2)) + ((x * x * x * x) / (24)) - ((x * x * x * x * x * x) / (720)) + ((x * x * x * x * x * x * x * x) / (40320)) - ((x * x * x * x * x * x * x * x * x * x) / (3628800)) + ((x * x * x * x * x * x * x * x * x * x * x * x) / (479001600));
 }
 
 double cos_taylor_literal_6terms_pi(double x)
 {
-    unsigned long sign = SIGN_BIT(x);
-    x = absd(x);
     x = modd(x, CONST_2PI);
-    double ret = (1 - ((x * x) / (2)) + ((x * x * x * x) / (24)) - ((x * x * x * x * x * x) / (720)) + ((x * x * x * x * x * x * x * x) / (40320)) - ((x * x * x * x * x * x * x * x * x * x) / (3628800)) + ((x * x * x * x * x * x * x * x * x * x * x * x) / (479001600)));
-    *((unsigned long *)&ret) |= sign << 63;
-    return ret;
+    char sign = 1;
+    if (x > CONST_PI)
+    {
+        x -= CONST_PI;
+        sign = -1;
+    }
+    return sign * (1 - ((x * x) / (2)) + ((x * x * x * x) / (24)) - ((x * x * x * x * x * x) / (720)) + ((x * x * x * x * x * x * x * x) / (40320)) - ((x * x * x * x * x * x * x * x * x * x) / (3628800)) + ((x * x * x * x * x * x * x * x * x * x * x * x) / (479001600)));
 }
 
 double cos_taylor_literal_6terms(double x)
