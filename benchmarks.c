@@ -43,7 +43,6 @@ int main(void)
     printf("cos_taylor_literal_6terms_2pi \t\t%.16f\n", accuracy(cos_taylor_literal_6terms_2pi));
     printf("cos_taylor_literal_6terms_pi \t\t%.16f\n", accuracy(cos_taylor_literal_6terms_pi));
     printf("cos_taylor_literal_6terms \t\t%.16f\n", accuracy(cos_taylor_literal_6terms));
-    /*
     printf("cos_taylor_literal_10terms \t\t%.16f\n", accuracy(cos_taylor_literal_10terms));
     printf("cos_taylor_running_6terms \t\t%.16f\n", accuracy(cos_taylor_running_6terms));
     printf("cos_taylor_running_8terms \t\t%.16f\n", accuracy(cos_taylor_running_8terms));
@@ -59,17 +58,13 @@ int main(void)
     printf("cos_table_0_01_LERP \t\t\t%.16f\n", accuracy(cos_table_0_01_LERP));
     printf("cos_table_0_001_LERP \t\t\t%.16f\n", accuracy(cos_table_0_001_LERP));
     printf("cos_table_0_0001_LERP \t\t\t%.16f\n", accuracy(cos_table_0_0001_LERP));
-*/
 
     printf("\nTIME\n");
-    /*
     printf("cos_taylor_literal_4terms_naive \t%.16f\n", runtime(cos_taylor_literal_4terms_naive));
     printf("cos_taylor_literal_6terms_naive \t%.16f\n", runtime(cos_taylor_literal_6terms_naive));
-    */
     printf("cos_taylor_literal_6terms_2pi \t\t%.16f\n", runtime(cos_taylor_literal_6terms_2pi));
     printf("cos_taylor_literal_6terms_pi \t\t%.16f\n", runtime(cos_taylor_literal_6terms_pi));
     printf("cos_taylor_literal_6terms \t\t%.16f\n", runtime(cos_taylor_literal_6terms));
-    /*
     printf("cos_taylor_literal_10terms \t\t%.16f\n", runtime(cos_taylor_literal_10terms));
     printf("cos_taylor_running_6terms \t\t%.16f\n", runtime(cos_taylor_running_6terms));
     printf("cos_taylor_running_8terms \t\t%.16f\n", runtime(cos_taylor_running_8terms));
@@ -86,7 +81,6 @@ int main(void)
     printf("cos_table_0_001_LERP \t\t\t%.16f\n", runtime(cos_table_0_001_LERP));
     printf("cos_table_0_0001_LERP \t\t\t%.16f\n", runtime(cos_table_0_0001_LERP));
     printf("math.h \t\t\t\t\t%.16f\n", runtime(cos));
-    */
     printf("\n");
 
     // Code for generating a data file for gnuplot.

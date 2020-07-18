@@ -53,14 +53,17 @@ double cos_taylor_literal_6terms_pi(double x)
 
 double cos_taylor_literal_6terms(double x)
 {
-    unsigned long sign = SIGN_BIT(x);
-    // x = absd(x);
     x = modd(x, CONST_2PI);
+    char sign = 1;
+    if (x > CONST_PI)
+    {
+        x -= CONST_PI;
+        sign = -1;
+    }
     double xx = x * x;
 
-    double ret = (1 - ((xx) / (2)) + ((xx * xx) / (24)) - ((xx * xx * xx) / (720)) + ((xx * xx * xx * xx) / (40320)) - ((xx * xx * xx * xx * xx) / (3628800)) + ((xx * xx * xx * xx * xx * xx) / (479001600)));
-    *((unsigned long *)&ret) |= sign << 63;
-    return ret;
+    return sign * (1 - ((xx) / (2)) + ((xx * xx) / (24)) - ((xx * xx * xx) / (720)) + ((xx * xx * xx * xx) / (40320)) - ((xx * xx * xx * xx * xx) / (3628800)) + ((xx * xx * xx * xx * xx * xx) / (479001600)));
+
 }
 
 double cos_taylor_literal_10terms(double x)
