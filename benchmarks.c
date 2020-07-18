@@ -35,7 +35,7 @@ double accuracy(double (*func)(double))
 #define RTEST(x)  { #x, x }
 
 struct Tester {
-    char name[255];
+    char name[35];
     double (*func)(double v);
 };
 
