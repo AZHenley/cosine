@@ -246,7 +246,7 @@ double cos_table_1_LERP(double x)
 double cos_table_0_1_LERP(double x)
 {
     x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
-    int index = (int)((x / 0.1) + CONST_EPS);
+    int index = (int)((x / 0.1));
     double v1 = costable_0_1[index];
     double v2 = costable_0_1[(index + 1)];
     double i = x * 10.0;
@@ -257,7 +257,7 @@ double cos_table_0_1_LERP(double x)
 double cos_table_0_01_LERP(double x)
 {
     x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
-    int index = (int)((x / 0.01) + CONST_EPS);
+    int index = (int)((x / 0.01));
     double v1 = costable_0_01[index];
     double v2 = costable_0_01[(index + 1)];
     double i = x * 100.0;
@@ -269,7 +269,7 @@ double cos_table_0_001_LERP(double x)
 {
     double ox = x;
     x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
-    int index = (int)((x / 0.001) + CONST_EPS);
+    int index = (int)((x / 0.001));
     double v1 = costable_0_001[index];
     double v2 = costable_0_001[(index + 1)];
     double i = x * 1000.0;
@@ -280,7 +280,7 @@ double cos_table_0_001_LERP(double x)
 double cos_table_0_0001_LERP(double x)
 {
     x = x - (int)(x * (1 / (CONST_PI * 2))) * (CONST_PI * 2);
-    int index = (int)((x / 0.0001) + CONST_EPS);
+    int index = (int)((x / 0.0001));
     double v1 = costable_0_0001[index];
     double v2 = costable_0_0001[(index + 1)];
     double i = x * 10000.0;
