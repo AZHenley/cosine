@@ -8,7 +8,7 @@
 double runtime(double (*func)(double))
 {
     clock_t start = clock();
-    for (volatile int i = 0; i < 100000000; i++)
+    for (int i = 0; i < 100000000; i++)
     {
         volatile double c = func(i / 10000.0);
     }
@@ -20,11 +20,11 @@ double accuracy(double (*func)(double))
 {
     double w = -1;
     double start = 0;
-    double stop = CONST_PI * 2;
+    double stop = CONST_2PI;
     double step = 0.0000001;
     for (double i = start; i < stop; i += step)
     {
-        double c = fabs(func(i) - cos(i));
+        double c = absd(func(i) - cos(i));
         if (c > w)
         {
             w = c;
