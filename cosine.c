@@ -211,7 +211,7 @@ double cos_table_1(double x)
 {
     x = absd(x);
     x = modd(x, CONST_2PI);
-    int index = (int)((x / 1.0) + 0.5);
+    int index = (int)(x + 0.5);
     return costable_1[index];
 }
 
@@ -219,7 +219,7 @@ double cos_table_0_1(double x)
 {
     x = absd(x);
     x = modd(x, CONST_2PI);
-    int index = (int)((x / 0.1) + 0.5);
+    int index = (int)(x * 10 + 0.5);
     return costable_0_1[index];
 }
 
@@ -228,7 +228,7 @@ double cos_table_0_01(double x)
 {
     x = absd(x);
     x = modd(x, CONST_2PI);
-    int index = (int)((x / 0.01) + 0.5);
+    int index = (int)(x * 100 + 0.5);
     return costable_0_01[index];
 }
 
@@ -236,7 +236,7 @@ double cos_table_0_001(double x)
 {
     x = absd(x);
     x = modd(x, CONST_2PI);
-    int index = (int)((x / 0.001) + 0.5);
+    int index = (int)(x * 1000 + 0.5);
     return costable_0_001[index];
 }
 
@@ -244,7 +244,7 @@ double cos_table_0_0001(double x)
 {
     x = absd(x);
     x = modd(x, CONST_2PI);
-    int index = (int)((x / 0.0001) + 0.5);
+    int index = (int)(x * 10000 + 0.5);
     return costable_0_0001[index];
 }
 
