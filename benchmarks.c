@@ -77,6 +77,7 @@ int main(int argc, char *argv[])
     int table = 1;
     int lerp = 1;
     int i;
+    int j;
 
     for (i = 1;i < argc;i++) {
         if (!strcmp(argv[i], "-na")) {
@@ -84,6 +85,35 @@ int main(int argc, char *argv[])
         }
         else if (!strcmp(argv[i], "-nt")) {
             run_runtime = 0;
+        }
+        else if (!strcmp(argv[i], "-t")) {
+            i++;
+            if (i >= argc) {
+                printf("Error, -t needs a test name.\n");
+                return -1;
+            }
+            for (j = 0;j < num_tests;j++) {
+                if (!strcmp(argv[i], tests[j].name)) {
+                    printf("ACCURACY\n");
+                    printf("%-35s %.16lf\n", tests[j].name, accuracy(tests[j].func));
+                    printf("\nTIME\n");            
+                    printf("%-35s %.16lf\n", tests[j].name, runtime(tests[j].func));
+                    return 0;
+                }
+            }            
+            printf("Test '%s' not found.\n", argv[i]);
+            return -1;
+        }
+        else if (!strcmp(argv[i], "-p")) {
+            printf("AVAILABLE TESTS\n");
+            for (j = 0;j < num_tests;j++) {
+                printf("%s\n", tests[j].name);
+            }
+            return 0;
+        }
+        else {
+            printf("Usage: %s [-na] [-nt] [-t <testname>]\n   -na - Don't run accuracy tests\n   -nt - Don't run speed tests.\n   -t <testname> - Run a particular test\n   -p - Print all test names.\n", argv[0]);
+            return 0;
         }
     }
 
