@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
             return 0;
         }
         else {
-            printf("Usage: %s [-na] [-nt] [-t <testname>]\n   -na - Don't run accuracy tests\n   -nt - Don't run speed tests.\n   -t <testname> - Run a particular test\n   -p - Print all test names.\n", argv[0]);
+            printf("Usage: %s [-na] [-nt] [-t <testname>]\n   -na - Don't run accuracy tests\n   -nt - Don't run speed tests.\n   -t <testname> - Run a particular test instead of all tests.\n   -p - Print all test names.\n", argv[0]);
             return 0;
         }
     }
