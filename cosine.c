@@ -12,8 +12,7 @@
 #define CONST_PI 3.14159265358979323846264338327950288419716939937510
 
 // Absolute value for doubles.
-inline double absd(double a) { *((unsigned long *)&a) &= ~(1UL << 63); return a; }
-
+double absd(double a) { *((unsigned long *)&a) &= ~(1UL << 63); return a; }
 
 //
 // Naive Taylor series functions.
