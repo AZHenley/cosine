@@ -15,7 +15,7 @@
 #define modd(x, y) ((x) - (int)((x) / (y)) * (y))
 #define lerp(w, v1, v2) ((1.0 - (w)) * (v1) + (w) * (v2))
 
-inline double absd(double a) { *((unsigned long *)&a) &= ~(1UL << 63); return a; }
+double absd(double a) { *((unsigned long *)&a) &= ~(1UL << 63); return a; }
 
 //
 // Naive Taylor series functions.
@@ -63,7 +63,6 @@ double cos_taylor_literal_6terms(double x)
     double xx = x * x;
 
     return sign * (1 - ((xx) / (2)) + ((xx * xx) / (24)) - ((xx * xx * xx) / (720)) + ((xx * xx * xx * xx) / (40320)) - ((xx * xx * xx * xx * xx) / (3628800)) + ((xx * xx * xx * xx * xx * xx) / (479001600)));
-
 }
 
 double cos_taylor_literal_10terms(double x)
