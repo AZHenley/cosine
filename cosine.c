@@ -12,11 +12,11 @@
 #define CONST_PI  3.14159265358979323846264338327950288419716939937510
 #define CONST_2PI 6.28318530717958623199592693708837032318115234375000
 
-// Absolute value for doubles.
-double absd(double a) { *((unsigned long *)&a) &= ~(1UL << 63); return a; }
-
 #define modd(x, y) ((x) - (int)((x) / (y)) * (y))
 #define lerp(w, v1, v2) ((1.0 - (w)) * (v1) + (w) * (v2))
+
+inline double absd(double a) { *((unsigned long *)&a) &= ~(1UL << 63); return a; }
+
 //
 // Naive Taylor series functions.
 //
@@ -35,7 +35,7 @@ double cos_taylor_literal_6terms_naive(double x)
 
 double cos_taylor_literal_6terms_2pi(double x)
 {
-    x = modd(x, 2 * CONST_PI);
+    x = modd(x, CONST_2PI);
     return 1 - ((x * x) / (2)) + ((x * x * x * x) / (24)) - ((x * x * x * x * x * x) / (720)) + ((x * x * x * x * x * x * x * x) / (40320)) - ((x * x * x * x * x * x * x * x * x * x) / (3628800)) + ((x * x * x * x * x * x * x * x * x * x * x * x) / (479001600));
 }
 
