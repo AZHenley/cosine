@@ -64,6 +64,8 @@ static struct {
     RTEST(cos_table_0_01_LERP),
     RTEST(cos_table_0_001_LERP),
     RTEST(cos_table_0_0001_LERP),
+    /* Built-in cosine */
+    RTEST(cos_math_h),
 };
 
 const int num_tests = sizeof(tests) / sizeof(*tests);

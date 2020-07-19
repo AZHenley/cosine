@@ -307,3 +307,7 @@ double cos_table_0_0001_LERP(double x)
                 costable_0_0001[index + 1]  /* upper value */
                 );
 }
+
+double cos_math_h(double x) {
+    return cos(x);
+}
