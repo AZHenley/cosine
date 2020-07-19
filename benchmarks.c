@@ -132,13 +132,6 @@ int main(int argc, char *argv[])
         }
     }
     printf("\n\nDone\n");
-    // Code for generating a data file for gnuplot.
-    /*
-    FILE *f = fopen("plots/cosine.txt", "w");
-    for(double x = 0.000; x < 4 * CONST_PI; x += 0.001) {
-        fprintf(f, "%lf\t%lf\n", x, cos(x));
-    }
-    */
 
     return 0;
 }
