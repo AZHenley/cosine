@@ -17,11 +17,9 @@ double runtime(double (*func)(double))
 }
 
 // Finds the worst case for accuracy compared to math.h. Smaller number is better.
-double accuracy(double (*func)(double))
+double accuracy(double (*func)(double), double start, double stop)
 {
     double w = -1;
-    double start = 0;
-    double stop = CONST_2PI;
     double step = 0.0000001;
     for (double i = start; i < stop; i += step)
     {
@@ -80,6 +78,8 @@ int main(int argc, char *argv[])
 {
     int run_accuracy = 1;
     int run_runtime = 1;
+    double start = 0;
+    double stop = CONST_2PI;
     int i;
     int j;
 
@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
             for (j = 0;j < num_tests;j++) {
                 if (!strcmp(argv[i], tests[j].name)) {
                     printf("ACCURACY\n");
-                    printf("%-35s %.16lf\n", tests[j].name, accuracy(tests[j].func));
+                    printf("%-35s %.16lf\n", tests[j].name, accuracy(tests[j].func, start, stop));
                     printf("\nTIME\n");            
                     printf("%-35s %.16lf\n", tests[j].name, runtime(tests[j].func));
                     return 0;
@@ -115,8 +115,12 @@ int main(int argc, char *argv[])
             }
             return 0;
         }
+        else if (!strcmp(argv[i], "-r")) {
+            start = -CONST_PI;
+            stop = CONST_PI;
+        }
         else {
-            printf("Usage: %s [-na] [-nt] [-t <testname>]\n   -na - Don't run accuracy tests\n   -nt - Don't run speed tests.\n   -t <testname> - Run a particular test instead of all tests.\n   -p - Print all test names.\n", argv[0]);
+            printf("Usage: %s [-na] [-nt] [-r] [-t <testname>]\n   -na - Don't run accuracy tests\n   -nt - Don't run speed tests.\n   -t <testname> - Run a particular test instead of all tests.\n   -p - Print all test names.\n   -r - Run accuracy test in range [-pi,pi] instead of [0,2pi].\n", argv[0]);
             return 0;
         }
     }
@@ -126,7 +130,7 @@ int main(int argc, char *argv[])
     if (run_accuracy) {
         printf("ACCURACY\n");
         for (i = 0;i < num_tests;i++) {
-            printf("%-35s %.16lf\n", tests[i].name, accuracy(tests[i].func));
+            printf("%-35s %.16lf\n", tests[i].name, accuracy(tests[i].func, start, stop));
         }
     }
     
