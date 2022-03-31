@@ -66,6 +66,11 @@ static struct {
     RTEST(cos_table_0_0001_LERP),
     /* Built-in cosine */
     RTEST(cos_math_h),
+    /* parabola based approximation */
+    RTEST(cos_parabola),
+    RTEST(cos_parabola_extra),
+    RTEST(cos_parabola_opt),
+    RTEST(cos_parabola_extra_opt),
 };
 
 const int num_tests = sizeof(tests) / sizeof(*tests);

@@ -310,3 +310,69 @@ double cos_table_0_0001_LERP(double x)
 double cos_math_h(double x) {
     return cos(x);
 }
+
+///
+/// Parabola based cos approximations
+///
+/// Original by Nick for sin can be found at [1]. The cos
+/// version here is deduced from `cos(x) = sin(x + pi/2)`.
+/// Additionally, the original only accounts for input values in [-pi..pi],
+/// making its precision absolutely horrible in the benchmark tests.
+///
+/// The optimized versions have been deduced by Milian Wolff, see [2].
+/// They are quite quick and don't have abysmal precision, giving them
+/// a nice position in the middle for both metrics.
+///
+/// [1]: https://web.archive.org/web/20171228230531/http://forum.devmaster.net/t/fast-and-accurate-sine-cosine/9648
+/// [2]: https://stackoverflow.com/a/28050328/35250
+///
+
+double cos_parabola(double x)
+{
+    // cos(x) = sin(x + pi/2)
+    x += (CONST_PI / 2.);
+
+    const double B = 4. / CONST_PI;
+    const double C = -4. / (CONST_PI * CONST_PI);
+
+    double y = B * x + C * x * fabs(x);
+
+    return y;
+}
+
+double cos_parabola_extra(double x)
+{
+    // cos(x) = sin(x + pi/2)
+    x += (CONST_PI / 2.);
+
+    const double B = 4. / CONST_PI;
+    const double C = -4. / (CONST_PI * CONST_PI);
+
+    double y = B * x + C * x * fabs(x);
+
+    // const float Q = 0.775;
+    const double P = 0.225;
+
+    y = P * (y * fabs(y) - y) + y;   // Q * y + P * y * abs(y)
+
+    return y;
+}
+
+double cos_parabola_opt(double x)
+{
+    const double tp = 1. / CONST_2PI;
+    x *= tp;
+    x -= .25 + floor(x + .25);
+    x *= 16. * (fabs(x) - .5);
+    return x;
+}
+
+double cos_parabola_extra_opt(double x)
+{
+    const double tp = 1. / CONST_2PI;
+    x *= tp;
+    x -= .25 + floor(x + .25);
+    x *= 16. * (fabs(x) - .5);
+    x += .225 * x * (fabs(x) - 1.);
+    return x;
+}
