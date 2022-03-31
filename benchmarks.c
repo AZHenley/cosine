@@ -20,7 +20,8 @@ double runtime(double (*func)(double))
 double accuracy(double (*func)(double), double start, double stop)
 {
     double w = -1;
-    double step = 0.0000001;
+    const double steps = (2. * CONST_PI) / 0.0000001;
+    const double step = (stop - start) / steps;
     for (double i = start; i < stop; i += step)
     {
         double c = absd(func(i) - cos(i));
@@ -119,8 +120,12 @@ int main(int argc, char *argv[])
             start = -CONST_PI;
             stop = CONST_PI;
         }
+        else if (!strcmp(argv[i], "-R")) {
+            start = -CONST_PI * 10;
+            stop = CONST_PI * 10;
+        }
         else {
-            printf("Usage: %s [-na] [-nt] [-r] [-t <testname>]\n   -na - Don't run accuracy tests\n   -nt - Don't run speed tests.\n   -t <testname> - Run a particular test instead of all tests.\n   -p - Print all test names.\n   -r - Run accuracy test in range [-pi,pi] instead of [0,2pi].\n", argv[0]);
+            printf("Usage: %s [-na] [-nt] [-r|-R] [-t <testname>]\n   -na - Don't run accuracy tests\n   -nt - Don't run speed tests.\n   -t <testname> - Run a particular test instead of all tests.\n   -p - Print all test names.\n   -r - Run accuracy test in range [-pi,pi] instead of [0,2pi].\n   -R - Run accuracy test in range [-10pi,10pi] instead of [0,2pi].\n", argv[0]);
             return 0;
         }
     }
